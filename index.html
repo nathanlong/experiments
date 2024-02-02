@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiments - Nathan Long</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/experiments/assets/index-a6cR1B3a.js"></script>
+    <link rel="modulepreload" crossorigin href="/experiments/assets/modulepreload-polyfill-9p4a8sJU.js">
+    <link rel="stylesheet" crossorigin href="/experiments/assets/index-zWLK6k_d.css">
+  </head>
+  <body>
+    <div class="content" data-filter>
+      <a href="#content" class="sr-only sr-only-focus skip-link"
+        >Skip filters</a
+      >
+      <h1>Experiments <a href="/">by Nathan Long</a></h1>
+      <a
+        class="source color-shift"
+        href="https://github.com/nathanlong/experiments/tree/main/src"
+        data-text=""
+      >
+        <span class="color-shift-text"> See Source </span>
+        <span class="color-shift-text blink">▶︎</span>
+      </a>
+      <div class="filter">
+        <div class="search-input-overlay">
+          <label for="search" class="sr-only">Filter by title</label>
+          <input
+            id="search"
+            name="search"
+            class="filter-search"
+            type="text"
+            placeholder="Filter by Title"
+            data-filter-search
+          />
+        </div>
+        <div class="filter-select-wrapper">
+          <select
+            id="sort"
+            name="sort"
+            class="filter-select"
+            data-filter-sort-tag
+          >
+            <option value="">Filter by tag</option>
+          </select>
+        </div>
+        <button class="filter-clear" data-filter-clear>Clear</button>
+      </div>
+      <div id="content" class="filter-results" data-filter-entry-section></div>
+    </div>
+    <div class="video-background">
+      <div class="crt-glow"></div>
+      <video
+        class="video-static"
+        src="/experiments/static.mp4"
+        poster="/experiments/static.webp"
+        muted
+        playsinline
+        loop
+        autoplay
+      ></video>
+    </div>
+    <div class="scanlines"></div>
+  </body>
+</html>

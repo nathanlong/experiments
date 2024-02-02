@@ -1,0 +1,1 @@
+import"../modulepreload-polyfill-9p4a8sJU.js";const t=document.querySelector(".scroll-hero-front"),n=window.innerHeight;let o;window.addEventListener("scroll",function(){o=window.scrollY,t.style.maxHeight=Math.max(0,n-o)+"px"});

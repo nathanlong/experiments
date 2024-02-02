@@ -1,0 +1,176 @@
+<!doctype html>
+<html class="" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Universal Fluid Grid Layouts</title>
+    <meta
+      name="description"
+      content="An attempt at a universal fluid tube-style layout pattern"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&family=Work+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/experiments/assets/modulepreload-polyfill-9p4a8sJU.js"></script>
+    <link rel="stylesheet" crossorigin href="/experiments/assets/index-cBgTE3xF.css">
+  </head>
+  <body>
+    <main class="grid-content flow">
+      <div class="full header flow">
+        <div class="feature">
+          <h1>Full-Bleed Fluid Grid Layouts</h1>
+          <p class="flow-3">
+            The goal is a universal layout that will handle most tube-style
+            designs.
+          </p>
+        </div>
+      </div>
+      <div class="flow">
+        <p>
+          Amet sit modi nulla quas quod deleniti totam magnam explicabo
+          accusamus, sunt! Labore beatae dolor tenetur earum quis Accusantium
+          maiores explicabo eius accusamus provident Exercitationem mollitia
+          aspernatur est iure possimus.
+        </p>
+        <p>
+          Adipisicing ab fugiat nostrum aliquam architecto. Eaque ex ad pariatur
+          quam omnis Vel eum voluptates animi in laboriosam Exercitationem
+          voluptatum aut illum sequi id Reprehenderit sequi aperiam quod
+          dignissimos officiis
+        </p>
+        <p>
+          Elit optio laborum nemo perferendis enim ea odit voluptatem!
+          Laboriosam dicta atque explicabo numquam ab perferendis! Sequi veniam
+          id illum eligendi ducimus, saepe, dolores Obcaecati consectetur
+          dolorem fugiat corporis illum
+        </p>
+        <p>
+          Consectetur exercitationem nemo praesentium autem nam. Eveniet numquam
+          quibusdam ipsum amet saepe similique totam ipsa Harum ullam soluta
+          ullam praesentium quis officiis Impedit quasi fugiat facere unde
+          tempore Deleniti soluta?
+        </p>
+        <p>
+          Sit tenetur aspernatur ea sed quidem Perferendis laborum quia nisi
+          corporis maxime! Dolores veritatis temporibus repudiandae eum tenetur?
+          Velit animi autem amet quis tenetur voluptatibus consequuntur, dolorem
+          Veniam asperiores nesciunt.
+        </p>
+      </div>
+      <div class="full grid-content callout">
+        <div class="feature flow">
+          <h2>Full with feature content</h2>
+          <p>
+            A full column will be inset with the grid, while relying on the
+            content class to handle side widths.
+          </p>
+          <p>
+            Lorem laborum dolores laboriosam excepturi velit eligendi.
+            Necessitatibus labore esse at modi error, harum. Molestiae nisi
+            excepturi modi ab fugiat Commodi placeat aliquam ipsum optio neque,
+            ex. Incidunt laudantium qui.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p>
+          Amet reiciendis illum magni perferendis blanditiis Qui inventore amet
+          odio magni illo ipsum Corrupti aperiam sint perferendis laudantium
+          dolorum voluptates Id voluptates autem debitis quibusdam earum. Ipsum
+          possimus facilis sed.
+        </p>
+      </div>
+
+      <div class="full grid-content callout">
+        <div class="content flow">
+          <h2>Full with content inset</h2>
+          <p>
+            A full column will be inset with the grid, while relying on the
+            content class to handle side widths.
+          </p>
+          <p>
+            Lorem laborum dolores laboriosam excepturi velit eligendi.
+            Necessitatibus labore esse at modi error, harum. Molestiae nisi
+            excepturi modi ab fugiat Commodi placeat aliquam ipsum optio neque,
+            ex. Incidunt laudantium qui.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p>
+          Amet reiciendis illum magni perferendis blanditiis Qui inventore amet
+          odio magni illo ipsum Corrupti aperiam sint perferendis laudantium
+          dolorum voluptates Id voluptates autem debitis quibusdam earum. Ipsum
+          possimus facilis sed.
+        </p>
+      </div>
+
+      <div class="feature inset callout">
+        <h2>Feature Inset</h2>
+        <p>
+          Sit atque at fugit magni deleniti Deserunt maxime nulla perferendis
+          nemo porro, dolor ut? Consequuntur minus eum reiciendis ipsum veniam?
+          Consectetur illum ducimus unde veritatis assumenda Rerum aperiam
+          corrupti error?
+        </p>
+      </div>
+
+      <!-- implied content size -->
+      <div>
+        <p>
+          Amet reiciendis illum magni perferendis blanditiis Qui inventore amet
+          odio magni illo ipsum Corrupti aperiam sint perferendis laudantium
+          dolorum voluptates Id voluptates autem debitis quibusdam earum. Ipsum
+          possimus facilis sed.
+        </p>
+      </div>
+
+      <div class="popout inset callout">
+        <h2>Popout Inset</h2>
+        <p>
+          Sit atque at fugit magni deleniti Deserunt maxime nulla perferendis
+          nemo porro, dolor ut? Consequuntur minus eum reiciendis ipsum veniam?
+          Consectetur illum ducimus unde veritatis assumenda Rerum aperiam
+          corrupti error?
+        </p>
+      </div>
+
+      <!-- raw tags will be forced to content -->
+      <p>
+        Dolor dolor dolores incidunt voluptas repellat. Obcaecati a expedita
+        iste quia accusamus, dolorum? Sapiente nisi mollitia soluta est deserunt
+        consectetur aperiam Neque doloremque voluptatum officia id eaque
+        Corrupti harum obcaecati.
+      </p>
+
+      <div class="feature grid-content callout">
+        <div class="popout">
+          <h2>Feature with inset grid for Popout Inset</h2>
+          <p>
+            Consectetur asperiores eveniet magnam saepe reprehenderit
+            Perferendis maxime recusandae odit pariatur alias repellat? Nulla
+            laboriosam iste animi quis saepe omnis! Natus iste accusamus aliquid
+            corrupti nihil Repellat quam similique quis.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <ul>
+          <li>Donec id elit non mi porta gravida at eget metus.</li>
+          <li>Nullam quis risus eget urna mollis ornare vel eu leo.</li>
+          <li>
+            Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
+            nibh, ut fermentum massa justo sit amet risus.
+          </li>
+        </ul>
+      </div>
+    </main>
+
+  </body>
+</html>
