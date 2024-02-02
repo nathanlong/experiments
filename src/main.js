@@ -1,5 +1,5 @@
 import "./style.css";
-import filter from "./filter.js"
+import filter from "./filter.js";
 
 async function populate() {
   const requestURL = "/experiments/postData.json";
@@ -35,10 +35,10 @@ function buildPosts(data) {
     myDate.textContent = post.date ? post.date + " - " : "* - ";
     myTags.textContent = post.tags;
     myText.prepend(myDate);
-    myLink.setAttribute('href', '/experiments' + post.url);
-    myTags.setAttribute('class', 'filter-entry-tags')
-    myH2.appendChild(myLink)
-    myH2.setAttribute('data-text', post.title)
+    myLink.setAttribute("href", "/experiments" + post.url);
+    myTags.setAttribute("class", "filter-entry-tags");
+    myH2.appendChild(myLink);
+    myH2.setAttribute("data-text", post.title);
     myArticle.appendChild(myH2);
     myArticle.appendChild(myText);
     myArticle.appendChild(myTags);
@@ -59,8 +59,8 @@ function buildPosts(data) {
     sort.appendChild(myOption);
   }
 
-  const filterEl = document.querySelector('[data-filter]')
-  new filter(filterEl)
+  const filterEl = document.querySelector("[data-filter]");
+  new filter(filterEl);
 }
 
 function onlyUnique(value, index, array) {
@@ -68,4 +68,3 @@ function onlyUnique(value, index, array) {
 }
 
 populate();
-

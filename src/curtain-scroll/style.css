@@ -1,0 +1,121 @@
+/* 03 - Title Scroll Crop
+ *
+ * This effect has 4 main elements and a tiny bit of JS to facilitate:is
+ *
+ * - The wrapper is 2x the height of the children 
+ * - The main element (scroll-hero) is  1x height and has position sticky 
+ * - The two sides are positioned absolutely in the main element
+ * - The front has an image set to absolute bottom
+ *
+ * As the user scrolls, the main element moves in the wrapper track and the JS
+ * reduces the max-height of the front element proportionately. Because the
+ * content is exactly the same (except image and colors) there's a curtain
+ * effect as the edge of the front element overlaps the back element
+ */
+
+/* Wrapper, 2x the height of the children */
+.scroll-hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200vh;
+}
+
+/* Main element, set to sticky */
+.scroll-hero {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+/* Shared styles for front and back elements */
+.scroll-hero-side {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  z-index: 1;
+  background-color: #e7e5e2;
+  width: calc(100% - 40px);
+  height: calc(100vh - 20px);
+  border-radius: 0 0 40px 40px;
+  overflow: hidden;
+}
+
+.scroll-hero-front {
+  z-index: 2;
+}
+
+/* Color difference to the front side text */
+.color-front {
+  color: white;
+}
+
+/* Front image, attached to bottom */
+/* for production use, different sizes would need to be loaded */
+.scroll-hero-front-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url('https://user-images.githubusercontent.com/623568/178015063-3b46e8ac-6848-4b0b-ac32-d2d573480ad8.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+/* Style differences from the front side */
+.scroll-hero-back {
+  background-color: lightcoral;
+}
+
+/* Shared content styles, using flexbox to position the same */
+.scroll-hero-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5vw;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Presentation purposes only, not related to the effect */
+/* ---------------------------------------------------------------------- */
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-inner {
+  line-height: 1.375;
+  margin: 0 auto;
+  max-width: 32rem;
+}
+
+.container-inner * + * {
+  margin-bottom: 2rem;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+h1 {
+  font-size: 4em;
+  margin: 0;
+  padding: 0;
+}
+
+.text-large {
+  font-size: 2rem;
+}

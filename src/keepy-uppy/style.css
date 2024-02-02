@@ -1,0 +1,39 @@
+/* Reset everything */
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  text-align: center;
+}
+
+canvas {
+  max-height: 100dvh;
+  width: auto !important;
+  aspect-ratio: 1/1;
+}
+
+.score {
+  font-family: monospace;
+  color: white;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+

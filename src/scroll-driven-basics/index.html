@@ -1,0 +1,379 @@
+<!doctype html>
+<html class="" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Scroll-Driven Basics</title>
+    <meta
+      name="description"
+      content="Timeline types, image reveals, faux scroll-jacking, video scrubbers."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <main id="content">
+      <div class="progress"></div>
+      <div class="content flow m-content">
+        <h1 class="feature">Scroll-Driven Animations Basics</h1>
+        <p class="color-white">
+          <strong>All of this is 100% CSS, no JavaScript 😮</strong> (With the
+          exception of the video scrubber)
+        </p>
+        <h2>Image Reveals</h2>
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+
+        <img
+          class="revealing-image feature"
+          src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+          alt=""
+        />
+
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+
+        <img
+          class="sliding-image feature"
+          src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2664&q=80"
+          alt=""
+        />
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+
+        <img
+          class="revealing-image feature"
+          src="https://images.unsplash.com/photo-1557264337-e8a93017fe92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+          alt=""
+        />
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+
+        <img
+          class="sliding-image feature"
+          src="https://images.unsplash.com/photo-1606054512716-fb198b6686c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80"
+          alt=""
+        />
+
+        <h2>Section Pin</h2>
+        <p>
+          <strong
+            >This will emulate scroll-jacking by creating a sticky track and
+            translating an element horizontally.</strong
+          >
+        </p>
+
+        <section class="section-pin full">
+          <div class="pin-wrap-sticky">
+            <div class="pin-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+                alt=""
+              />
+              <img
+                src="https://images.unsplash.com/photo-1550684848-86a5d8727436?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+                alt=""
+              />
+              <img
+                src="https://images.unsplash.com/photo-1580610447943-1bfbef5efe07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+                alt=""
+              />
+              <img
+                src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+                alt=""
+              />
+            </div>
+          </div>
+        </section>
+
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+
+        <h2>3D Phone Spin</h2>
+        <p><strong>Slightly spin 3D CSS elements.</strong></p>
+
+        <div class="feature my-4 phone-container">
+          <div class="phone phone-1">
+            <div class="phone-back"></div>
+            <div class="phone-front">
+              <div class="phone-screen">
+                <img
+                  class="phone-screen-img"
+                  src="https://images.unsplash.com/photo-1691379635079-9f438036ea58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="phone phone-2">
+            <div class="phone-back"></div>
+            <div class="phone-front">
+              <div class="phone-screen">
+                <img
+                  class="phone-screen-img"
+                  src="https://images.unsplash.com/photo-1690993660127-1a7cdd87ec9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+
+        <h2>Video Scroll Scrub</h2>
+        <p>
+          <strong
+            >Use the animation progress values from the browser to progress an
+            HTML video element.</strong
+          >
+        </p>
+
+        <div class="full video-scrub-track">
+          <div class="video-scrub-el">
+            <!-- it matters VERY much how you encode the video -->
+            <video
+              loop
+              muted
+              playsinline
+              class="video-scrub-cover"
+              aria-labelledby="video-label"
+              width="1280"
+              height="720"
+            >
+              <source
+                type="video/mp4"
+                src="https://user-images.githubusercontent.com/623568/260548119-53628cc6-0cbc-40a4-a16c-8e2687c9d737.mp4"
+              />
+            </video>
+          </div>
+        </div>
+
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+      </div>
+    </main>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

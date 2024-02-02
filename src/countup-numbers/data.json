@@ -1,0 +1,1 @@
+{ "title": "Animated Number Counter on Scroll", "description": "Uses intersectionObserver and some javascript to count numbers up from 0 when they enter the frame.", "tags": "javascript", "url": "/countup-numbers/", "date": "2023-01-02" }

@@ -1,0 +1,343 @@
+<!doctype html>
+<html class="" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fade-In On Scroll</title>
+    <meta
+      name="description"
+      content="Make elements fade-in gracefully as they enter the viewport"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main id="content" class="m-content">
+      <div class="content mb-10vh flow" data-module="appear">
+        <h1>Fade-In on Scroll</h1>
+        <p>
+          Uses <code>intersectionObserver</code> and the Web Animation API. Each
+          element will animate in when scrolled into view.
+        </p>
+        <hr />
+        <h2 class="appear" data-appear-opacity="0.1">
+          The Picture of Dorian Gray
+        </h2>
+        <img
+          class="feature appear"
+          data-appear-opacity="0.1"
+          src="https://images.unsplash.com/photo-1633477189729-9290b3261d0a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZG9yaWFuJTIwZ3JheXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+          alt="Ornate novel cover"
+        />
+
+        <div class="text-group appear flow">
+          <p>
+            After some time Dorian Gray looked up. "You have explained me to
+            myself, Harry," he murmured with something of a sigh of relief. "I
+            felt all that you have said, but somehow I was afraid of it, and I
+            could not express it to myself. How well you know me! But we will
+            not talk again of what has happened. It has been a marvellous
+            experience. That is all. I wonder if life has still in store for me
+            anything as marvellous."
+          </p>
+
+          <p>
+            "Life has everything in store for you, Dorian. There is nothing that
+            you, with your extraordinary good looks, will not be able to do."
+          </p>
+
+          <p>
+            "But suppose, Harry, I became haggard, and old, and wrinkled? What
+            then?"
+          </p>
+
+          <p>
+            "Ah, then," said Lord Henry, rising to go, "then, my dear Dorian,
+            you would have to fight for your victories. As it is, they are
+            brought to you. No, you must keep your good looks. We live in an age
+            that reads too much to be wise, and that thinks too much to be
+            beautiful. We cannot spare you. And now you had better dress and
+            drive down to the club. We are rather late, as it is."
+          </p>
+        </div>
+
+        <div class="feature appear bg-callout flex p-1 my-2">
+          <div class="appear w-1/2" data-appear-delay="200">
+            Stagger Test 200ms
+          </div>
+
+          <div class="appear w-1/2" data-appear-delay="400">
+            Stagger delay 400ms
+          </div>
+        </div>
+
+        <div class="text-group appear flow">
+          <p>
+            "I think I shall join you at the opera, Harry. I feel too tired to
+            eat anything. What is the number of your sister's box?"
+          </p>
+
+          <p>
+            "Twenty-seven, I believe. It is on the grand tier. You will see her
+            name on the door. But I am sorry you won't come and dine."
+          </p>
+
+          <p>
+            "I don't feel up to it," said Dorian listlessly. "But I am awfully
+            obliged to you for all that you have said to me. You are certainly
+            my best friend. No one has ever understood me as you have."
+          </p>
+        </div>
+
+        <blockquote class="appear flow">
+          <p class="mt-0 appear" data-appear-delay="200">
+            "We are only at the beginning of our friendship, Dorian," answered
+            Lord Henry, shaking him by the hand. "Good-bye. I shall see you
+            before nine-thirty, I hope. Remember, Patti is singing."
+          </p>
+          <small class="appear block" data-appear-delay="400"
+            >Delay of 200ms for text, and a separate 400ms for this small text.
+            (Also does not work in display:inline elements)</small
+          >
+        </blockquote>
+
+        <div class="text-group appear flow">
+          <p>
+            As he closed the door behind him, Dorian Gray touched the bell, and
+            in a few minutes Victor appeared with the lamps and drew the blinds
+            down. He waited impatiently for him to go. The man seemed to take an
+            interminable time over everything.
+          </p>
+
+          <p>
+            As soon as he had left, he rushed to the screen and drew it back.
+            No; there was no further change in the picture. It had received the
+            news of Sibyl Vane's death before he had known of it himself. It was
+            conscious of the events of life as they occurred. The vicious
+            cruelty that marred the fine lines of the mouth had, no doubt,
+            appeared at the very moment that the girl had drunk the poison,
+            whatever it was. Or was it indifferent to results? Did it merely
+            take cognizance of what passed within the soul? He wondered, and
+            hoped that some day he would see the change taking place before his
+            very eyes, shuddering as he hoped it.
+          </p>
+        </div>
+
+        <div class="feature flex gap-1 my-2">
+          <div class="card appear" data-appear-delay="0">
+            <img src="https://via.placeholder.com/600x400/99ff99" alt="" />
+            <div class="p-1">
+              <h3 class="m-0">Card 1</h3>
+              <p>So majesetic. 0ms</p>
+            </div>
+          </div>
+          <div class="card appear" data-appear-delay="200">
+            <img src="https://via.placeholder.com/600x400/ff9999" alt="" />
+            <div class="p-1">
+              <h3 class="m-0">Card 2</h3>
+              <p>Such wow. 200ms</p>
+            </div>
+          </div>
+          <div class="card appear" data-appear-delay="400">
+            <img src="https://via.placeholder.com/600x400/9999ff" alt="" />
+            <div class="p-1">
+              <h3 class="m-0">Card 3</h3>
+              <p>Much delay. 400ms</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-group appear flow">
+          <p>
+            Poor Sibyl! What a romance it had all been! She had often mimicked
+            death on the stage. Then Death himself had touched her and taken her
+            with him. How had she played that dreadful last scene? Had she
+            cursed him, as she died? No; she had died for love of him, and love
+            would always be a sacrament to him now. She had atoned for
+            everything by the sacrifice she had made of her life. He would not
+            think any more of what she had made him go through, on that horrible
+            night at the theatre. When he thought of her, it would be as a
+            wonderful tragic figure sent on to the world's stage to show the
+            supreme reality of love. A wonderful tragic figure? Tears came to
+            his eyes as he remembered her childlike look, and winsome fanciful
+            ways, and shy tremulous grace. He brushed them away hastily and
+            looked again at the picture.
+          </p>
+
+          <p>
+            He felt that the time had really come for making his choice. Or had
+            his choice already been made? Yes, life had decided that for
+            him--life, and his own infinite curiosity about life. Eternal youth,
+            infinite passion, pleasures subtle and secret, wild joys and wilder
+            sins--he was to have all these things. The portrait was to bear the
+            burden of his shame: that was all.
+          </p>
+        </div>
+
+        <hr />
+
+        <h2 class="appear">The Adventures of Sherlock Holmes</h2>
+
+        <img
+          class="feature appear"
+          src="https://images.unsplash.com/photo-1585372210676-6ec79a03765e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c2hlcmxvY2slMjBob2xtZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+          alt="Old 'World Wide Atlas' next to a window"
+        />
+
+        <div class="text-group appear flow">
+          <p>
+            "On the contrary," said Holmes, "it is the brightest rift which I
+            can at present see in the clouds. However innocent he might be, he
+            could not be such an absolute imbecile as not to see that the
+            circumstances were very black against him. Had he appeared surprised
+            at his own arrest, or feigned indignation at it, I should have
+            looked upon it as highly suspicious, because such surprise or anger
+            would not be natural under the circumstances, and yet might appear
+            to be the best policy to a scheming man. His frank acceptance of the
+            situation marks him as either an innocent man, or else as a man of
+            considerable self-restraint and firmness. As to his remark about his
+            deserts, it was also not unnatural if you consider that he stood
+            beside the dead body of his father, and that there is no doubt that
+            he had that very day so far forgotten his filial duty as to bandy
+            words with him, and even, according to the little girl whose
+            evidence is so important, to raise his hand as if to strike him. The
+            self-reproach and contrition which are displayed in his remark
+            appear to me to be the signs of a healthy mind rather than of a
+            guilty one."
+          </p>
+
+          <p>
+            I shook my head. "Many men have been hanged on far slighter
+            evidence," I remarked.
+          </p>
+
+          <p>"So they have. And many men have been wrongfully hanged."</p>
+
+          <p>"What is the young man's own account of the matter?"</p>
+
+          <p>
+            "It is, I am afraid, not very encouraging to his supporters, though
+            there are one or two points in it which are suggestive. You will
+            find it here, and may read it for yourself."
+          </p>
+        </div>
+
+        <div class="feature flex gap-1 my-2">
+          <div class="card appear" data-appear-delay="0">
+            <img src="https://via.placeholder.com/600x400/99ff99" alt="" />
+            <div class="p-1">
+              <h3 class="m-0">Card 1</h3>
+              <p>So majesetic. 0ms</p>
+            </div>
+          </div>
+          <div class="card appear" data-appear-delay="200">
+            <img src="https://via.placeholder.com/600x400/ff9999" alt="" />
+            <div class="p-1">
+              <h3 class="m-0">Card 2</h3>
+              <p>Such wow. 200ms</p>
+            </div>
+          </div>
+          <div class="card appear" data-appear-delay="400">
+            <img src="https://via.placeholder.com/600x400/9999ff" alt="" />
+            <div class="p-1">
+              <h3 class="m-0">Card 3</h3>
+              <p>Much delay. 400ms</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-group appear flow">
+          <p>
+            He picked out from his bundle a copy of the local Herefordshire
+            paper, and having turned down the sheet he pointed out the paragraph
+            in which the unfortunate young man had given his own statement of
+            what had occurred. I settled myself down in the corner of the
+            carriage and read it very carefully. It ran in this way:
+          </p>
+
+          <p>
+            "Mr. James McCarthy, the only son of the deceased, was then called
+            and gave evidence as follows: 'I had been away from home for three
+            days at Bristol, and had only just returned upon the morning of last
+            Monday, the 3rd. My father was absent from home at the time of my
+            arrival, and I was informed by the maid that he had driven over to
+            Ross with John Cobb, the groom. Shortly after my return I heard the
+            wheels of his trap in the yard, and, looking out of my window, I saw
+            him get out and walk rapidly out of the yard, though I was not aware
+            in which direction he was going. I then took my gun and strolled out
+            in the direction of the Boscombe Pool, with the intention of
+            visiting the rabbit warren which is upon the other side. On my way I
+            saw William Crowder, the game-keeper, as he had stated in his
+            evidence; but he is mistaken in thinking that I was following my
+            father. I had no idea that he was in front of me. When about a
+            hundred yards from the pool I heard a cry of "Cooee!" which was a
+            usual signal between my father and myself. I then hurried forward,
+            and found him standing by the pool. He appeared to be much surprised
+            at seeing me and asked me rather roughly what I was doing there. A
+            conversation ensued which led to high words and almost to blows, for
+            my father was a man of a very violent temper. Seeing that his
+            passion was becoming ungovernable, I left him and returned towards
+            Hatherley Farm. I had not gone more than 150 yards, however, when I
+            heard a hideous outcry behind me, which caused me to run back again.
+            I found my father expiring upon the ground, with his head terribly
+            injured. I dropped my gun and held him in my arms, but he almost
+            instantly expired. I knelt beside him for some minutes, and then
+            made my way to Mr. Turner's lodge-keeper, his house being the
+            nearest, to ask for assistance. I saw no one near my father when I
+            returned, and I have no idea how he came by his injuries. He was not
+            a popular man, being somewhat cold and forbidding in his manners,
+            but he had, as far as I know, no active enemies. I know nothing
+            further of the matter.'
+          </p>
+
+          <p>
+            "The Coroner: Did your father make any statement to you before he
+            died?
+          </p>
+        </div>
+
+        <blockquote class="appear flow">
+          <p class="appear" data-appear-delay="200">
+            "Witness: He mumbled a few words, but I could only catch some
+            allusion to a rat.
+          </p>
+          <p class="appear" data-appear-delay="400" data-appear-offset="48">
+            "The Coroner: What did you understand by that?
+          </p>
+        </blockquote>
+
+        <div class="text-group appear flow">
+          <p>
+            "Witness: It conveyed no meaning to me. I thought that he was
+            delirious.
+          </p>
+
+          <p>
+            "The Coroner: What was the point upon which you and your father had
+            this final quarrel?
+          </p>
+
+          <p>"Witness: I should prefer not to answer.</p>
+
+          <p>"The Coroner: I am afraid that I must press it.</p>
+
+          <p>
+            "Witness: It is really impossible for me to tell you. I can assure
+            you that it has nothing to do with the sad tragedy which followed.
+          </p>
+        </div>
+
+        <img
+          class="appear"
+          src="https://images.unsplash.com/photo-1619152338675-a610109d5d4a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8c2hlcmxvY2slMjBob2xtZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+          alt="Narrow urban street during sunset"
+        />
+      </div>
+    </main>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

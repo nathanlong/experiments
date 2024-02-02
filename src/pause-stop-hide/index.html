@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pause, Stop, Hide</title>
+    <meta name="description" content="Global animation toggle controls" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <script>
+      // intentially blocking while we check initial settings
+      function getInitialMotionMode() {
+        // check if a user preference is set, if so, use it
+        const persistedMotionPreference =
+          window.localStorage.getItem('motion-mode')
+        const hasPersistedPreference =
+          typeof persistedMotionPreference === 'string'
+        if (hasPersistedPreference) {
+          return persistedMotionPreference
+        }
+
+        // otherwise check for system preferences
+        const mql = window.matchMedia(
+          '(prefers-reduced-motion: no-preference)'
+        )
+        const hasMediaQueryPreference = typeof mql.matches === 'boolean'
+        if (hasMediaQueryPreference) {
+          return mql.matches ? 'no-preference' : 'reduced'
+        }
+
+        // if nothing is set, return a default
+        return 'no-preference'
+      }
+
+      const motionMode = getInitialMotionMode()
+
+      // set up css variables we'll be using later
+      const root = document.documentElement
+      root.style.setProperty(
+        '--play-state',
+        motionMode === 'reduced' ? 'paused' : 'running'
+      )
+      root.style.setProperty(
+        '--transition-toggle',
+        motionMode === 'reduced' ? '0' : '1'
+      )
+      // stash the initial check that we can access later
+      root.style.setProperty('--initial-motion-mode', motionMode)
+    </script>
+    <main>
+      <article class="content">
+        <div class="toggle-wrapper">
+          <input
+            type="checkbox"
+            id="toggle-motion"
+            name="toggle-motion"
+            data-animation-toggle
+          />
+          <label for="toggle-motion">Allow Motion</label>
+        </div>
+        <div class="grid">
+          <div class="grid-fr css">
+            <div class="css-anim">
+              <div class="eye-left"></div>
+              <div class="eye-right"></div>
+            </div>
+            <span class="anim-label">CSS</span>
+          </div>
+          <div class="grid-fr css">
+            <div class="transition-anim">
+              <div class="eye-left"></div>
+              <div class="eye-right"></div>
+            </div>
+            <span class="anim-label">Transitions (ex. hover)</span>
+          </div>
+          <div class="grid-fr waapi">
+            <div class="waapi-anim">
+              <div class="eye-left">꩜</div>
+              <div class="eye-right">꩜</div>
+            </div>
+            <span class="anim-label">WAAPI</span>
+          </div>
+          <div class="grid-fr gsap">
+            <div class="gsap-anim">
+              <div class="eye-left"></div>
+              <div class="eye-right"></div>
+            </div>
+            <span class="anim-label">GSAP</span>
+          </div>
+        </div>
+
+        <div class="container mt-rando flow">
+          <p>
+            This page sets a preference in <code>localStorage</code> based off
+            whether a user has opted out of animations (via system settings
+            like System Preferences / Accessibility / Display / Reduce Motion)
+            but also via a global toggle.
+          </p>
+          <p>
+            The toggle will override the initial settings and persist until
+            either the user changes their system settings or interacts with
+            the global toggle.
+          </p>
+          <p>
+            <button class="pref-destroy">Destroy local preference</button>
+            <small>(Useful for a clean reload for testing initial state)</small
+            >
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

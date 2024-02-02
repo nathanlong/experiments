@@ -27,14 +27,16 @@
             data-filter-search
           />
         </div>
-        <select
-          id="sort"
-          name="sort"
-          class="filter-select"
-          data-filter-sort-tag
-        >
-          <option value="">Filter by tag</option>
-        </select>
+        <div class="filter-select-wrapper">
+          <select
+            id="sort"
+            name="sort"
+            class="filter-select"
+            data-filter-sort-tag
+          >
+            <option value="">Filter by tag</option>
+          </select>
+        </div>
         <button class="filter-clear" data-filter-clear>Clear</button>
       </div>
       <div id="app" class="filter-results" data-filter-entry-section></div>
