@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiments - Nathan Long</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="content" data-filter>
+      <h1>Experiments <a href="/">by Nathan Long</a></h1>
+      <div class="filter">
+        <div class="search-input-overlay">
+          <label for="search" class="sr-only">Filter by title</label>
+          <input
+            id="search"
+            name="search"
+            class="filter-search"
+            type="text"
+            placeholder="Filter by Title"
+            data-filter-search
+          />
+        </div>
+        <select
+          id="sort"
+          name="sort"
+          class="filter-select"
+          data-filter-sort-tag
+        >
+          <option value="">Filter by tag</option>
+        </select>
+        <button class="filter-clear" data-filter-clear>Clear</button>
+      </div>
+      <div id="app" class="filter-results" data-filter-entry-section></div>
+    </div>
+    <div class="video-background">
+      <div class="crt-glow"></div>
+      <video
+        class="video-static"
+        src="/static.mp4"
+        muted
+        playsinline
+        loop
+        autoplay
+      ></video>
+    </div>
+    <div class="scanlines"></div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

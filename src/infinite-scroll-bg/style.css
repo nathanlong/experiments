@@ -1,0 +1,124 @@
+/* 01 - INFINITE SCROLLING BACKGROUND
+ *
+ * In order for a smooth transition at the end of the animation, the base
+ * height variable needs to be the computed height of the image background,
+ * otherwise there is a stutter as the animation resets
+ *
+ * We'll go ahead and set it here, but then we'll use a tiny bit of JS to set
+ * the computed size of the image to ensure it's a smooth transition at any
+ * size.
+ */
+
+
+/* Reset everything */
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set base variables */
+:root {
+  --base-height: 1920px;
+  --animation-duration: 60s;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.image-wrapper {
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+
+.image-ribbon {
+  animation: slide var(--animation-duration) linear infinite;
+  backface-visibility: hidden;
+  background-image: url('https://user-images.githubusercontent.com/623568/172632914-7726f517-ea2d-4a82-a4dd-26b541e125d9.jpg');
+  background-repeat: repeat-y;
+  background-size: contain;
+  height: calc(var(--base-height) * 3);
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  width: 100%;
+  will-change: transform;
+}
+
+.overlay {
+  background-image: linear-gradient(
+    180deg,
+    rgb(20 20 26 / 0%) 11.64%,
+    #14141a
+  );
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateZ(0);
+  }
+
+  to {
+    transform: translate3d(0, calc(var(--base-height) * -1), 0);
+  }
+}
+
+/* Page Specific Presentation (not related to the animation)
+   -------------------------------------------------------------------------- */
+
+body {
+  background-color: #222;
+  color: #fff;
+}
+
+a {
+  color: #0c0;
+}
+
+.button-controls {
+  margin-top: 1em;
+}
+
+button {
+  background: transparent;
+  border: 2px solid currentColor;
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  margin: 0.25em;
+}
+
+button:hover, button:focus {
+  background: rgba(255,255,255,0.3);
+}
+
+button:active {
+  background: white;
+  color: black;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100dvh;
+  padding: 0 2em;
+}
+
+p {
+  margin: 1em 0;
+}
