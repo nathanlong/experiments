@@ -12,7 +12,7 @@ async function populate() {
 }
 
 function buildPosts(data) {
-  const section = document.querySelector("#app");
+  const section = document.querySelector("#content");
   const sort = document.querySelector("#sort");
   const posts = data;
   const tags = [];
