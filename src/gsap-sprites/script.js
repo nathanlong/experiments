@@ -84,7 +84,6 @@ class Phone {
         end: "bottom 30%",
         // end: "+=" + (this.frames * this.frame_height),
         scrub: 1,
-        // scrub: true,
         // markers: {startColor:"green", endColor:"red", fontSize:"12px"},
       },
     });
@@ -140,7 +139,7 @@ class Airpods {
         start: "top",
         end: "bottom",
         scrub: 0.5,
-        markers: true,
+        // markers: true,
       },
       onUpdate: this.render,
     });
