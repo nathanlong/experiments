@@ -17,7 +17,9 @@
     "vite": "^5.0.8"
   },
   "dependencies": {
+    "@georgedoescode/spline": "^1.0.1",
     "gsap": "^3.12.5",
-    "matter-js": "^0.19.0"
+    "matter-js": "^0.19.0",
+    "simplex-noise": "^4.0.2"
   }
 }

@@ -1,0 +1,114 @@
+/* Reset everything */
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* GRID - originally from: https://ryanmulligan.dev/blog/layout-breakouts/ */
+  /* gap: controls edge spacing from mobile to desktop */
+  --gap: clamp(1rem, 6vw, 3rem);
+  /* full: exactly what it says, full width */
+  --full: minmax(var(--gap), 1fr);
+  /* content: core width of layout */
+  /* min value is content width, other stuff is for math */
+  --content: min(40em, 100% - var(--gap) * 2);
+  /* popout: offset value from content divided by 2 */
+  /* make popout same max width as gap for flush insets */
+  --popout: minmax(0, 3rem);
+  /* feature: value is offset from content divided by 2 */
+  --feature: minmax(0, 10rem);
+  /* the minmax 0 allows these two columns to compress down to nothing */
+}
+
+
+/* grid is the clean, but each full needs it's own grid */
+.grid-content {
+  display: grid;
+  grid-template-columns:
+    [full-start] var(--full)
+    [feature-start] var(--feature)
+    [popout-start] var(--popout)
+    [content-start] var(--content) [content-end]
+    var(--popout) [popout-end]
+    var(--feature) [feature-end]
+    var(--full) [full-end];
+}
+
+.grid-content > *,
+.content {
+  grid-column: content;
+}
+
+.popout {
+  grid-column: popout;
+}
+
+.feature {
+  grid-column: feature;
+}
+
+.full {
+  grid-column: full;
+}
+
+.inset {
+  padding-inline: var(--gap);
+}
+
+/* FLOW - originally from: https://piccalil.li/blog/my-favourite-3-lines-of-css/ */
+/* flow addresses the amount of space between elements but doesn't cascade past one level */
+
+.flow > * + * {
+  margin-block-start: var(--flow-space, 1em);
+}
+
+.flow-0 {
+  --flow-space: 0em;
+}
+
+.flow-1 {
+  --flow-space: 1em;
+}
+
+.flow-3\/2 {
+  --flow-space: 1.5em;
+}
+
+.flow-2 {
+  --flow-space: 2em;
+}
+
+.flow-3 {
+  --flow-space: 3em;
+}
+
+/* TYPOGRAPHY */
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #fcfcfc;
+  color: #161616;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5 {
+  line-height: 1.25;
+}
+
+/* DEMO PURPOSES */
+
+.header {
+  text-align: center;
+  background-color: lemonchiffon;
+  padding-block: var(--gap);
+}
+
+.callout {
+  background-color: magenta;
+  color: white;
+  padding-block: var(--gap);
+}
