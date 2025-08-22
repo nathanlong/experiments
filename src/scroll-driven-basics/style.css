@@ -23,6 +23,10 @@ h1 {
   text-wrap: balance;
 }
 
+h1, h2, h3, h4, h5 {
+  line-height: 1;
+}
+
 .color-white,
 h2,
 h3,
@@ -87,19 +91,21 @@ html {
   }
 }
 
-.revealing-image {
+.revealing-image-flow-container {
   /* Create View Timeline */
   /* controls progress of animation based on the visibility of element in a scrolling element */
   /* accepts css vars as custom names */
   view-timeline-name: --revealing-image;
   view-timeline-axis: block;
+}
 
+.revealing-image {
   /* Attach animation, linked to the View Timeline */
   animation: ease-out reveal both;
   animation-timeline: --revealing-image;
 
   /* Tweak range when effect should run. Accepts % and units
-   * - entry: when it starts to enter the viewport 
+   * - entry: when it starts to enter the viewport
    * - exit: the point where it completely leaves the scroll port
    * - cover: full range from entry to where it's completely left the scroll port
    * - contain: the range where the element is fully contained (first full-vis to last full-vis)
@@ -118,9 +124,12 @@ html {
   }
 }
 
-.sliding-image {
+.sliding-image-flow-container {
   view-timeline-name: --sliding-image;
   view-timeline-axis: block;
+}
+
+.sliding-image {
   animation: ease-out slideIn both;
   animation-timeline: --sliding-image;
   animation-range: entry 25% cover 50%;
@@ -397,6 +406,10 @@ html {
 .container {
   max-width: 33em;
   margin: 4em auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .container > * + * {

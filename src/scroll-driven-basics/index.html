@@ -8,9 +8,12 @@
       content="Timeline types, image reveals, faux scroll-jacking, video scrubbers."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <main id="content">
@@ -19,7 +22,12 @@
         <h1 class="feature">Scroll-Driven Animations Basics</h1>
         <p class="color-white">
           <strong>All of this is 100% CSS, no JavaScript 😮</strong> (With the
-          exception of the video scrubber). And it's <a href="">polyfilled</a> until <a href="https://caniuse.com/mdn-css_properties_animation-timeline_view">support drops in Safari</a>.
+          exception of the video scrubber). And it's
+          <a href="">polyfilled</a> until
+          <a
+            href="https://caniuse.com/mdn-css_properties_animation-timeline_view"
+            >support drops in Safari</a
+          >.
         </p>
         <h2>Image Reveals</h2>
         <p>
@@ -52,11 +60,16 @@
           obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
         </p>
 
-        <img
-          class="revealing-image feature"
-          src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-          alt=""
-        />
+        <!-- We have to contain the image transformations from overflowing, but we need to place the view-timeline creation in the flow of the scrolling element -->
+        <div
+          class="revealing-image-flow-container full overflow-hidden content"
+        >
+          <img
+            class="revealing-image feature"
+            src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+            alt="Pink and blue light matrix"
+          />
+        </div>
 
         <p>
           Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
@@ -88,11 +101,52 @@
           obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
         </p>
 
-        <img
-          class="sliding-image feature"
-          src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2664&q=80"
-          alt=""
-        />
+        <!-- A different transition pattern -->
+        <div class="sliding-image-flow-container full overflow-hidden content">
+          <img
+            class="sliding-image feature"
+            src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2664&q=80"
+            alt="Soft blue shapes on a dark blue field"
+          />
+        </div>
+        <p>
+          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
+          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
+          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
+          perferendis Necessitatibus voluptates.
+        </p>
+        <p>
+          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
+          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
+          explicabo atque Repellat quae porro accusantium doloremque possimus
+          Assumenda expedita recusandae quidem.
+        </p>
+        <p>
+          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
+          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
+          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
+          distinctio repellendus sed officia.
+        </p>
+        <p>
+          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
+          numquam aliquid facilis repellendus animi voluptates! Exercitationem
+          vero autem molestiae dolorem exercitationem. Harum architecto eaque
+          quis rem veniam Nemo.
+        </p>
+        <p>
+          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
+          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
+          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
+        </p>
+        <div
+          class="revealing-image-flow-container full overflow-hidden content"
+        >
+          <img
+            class="revealing-image feature"
+            src="https://images.unsplash.com/photo-1557264337-e8a93017fe92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+            alt="Concentric rings of blue and purple paint swirls"
+          />
+        </div>
         <p>
           Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
           similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
@@ -123,54 +177,32 @@
           obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
         </p>
 
-        <img
-          class="revealing-image feature"
-          src="https://images.unsplash.com/photo-1557264337-e8a93017fe92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-          alt=""
-        />
-        <p>
-          Amet ad illum dolor accusamus voluptate, iusto. Explicabo itaque
-          similique praesentium reiciendis dolorum quis doloribus? Enim eligendi
-          illum rerum aut aperiam? Doloribus culpa nisi velit officia facere
-          perferendis Necessitatibus voluptates.
-        </p>
-        <p>
-          Amet nostrum atque natus doloribus minima! Iusto eum nisi eveniet
-          quaerat aspernatur? Nulla repudiandae magnam modi modi explicabo
-          explicabo atque Repellat quae porro accusantium doloremque possimus
-          Assumenda expedita recusandae quidem.
-        </p>
-        <p>
-          Adipisicing explicabo laborum sint nesciunt illum? Delectus lorem at
-          nobis libero cumque? Blanditiis mollitia ratione vitae cumque laborum
-          Voluptatem cupiditate molestiae natus impedit id sunt Assumenda
-          distinctio repellendus sed officia.
-        </p>
-        <p>
-          Adipisicing earum natus harum soluta sit quos aperiam Ad cum ratione
-          numquam aliquid facilis repellendus animi voluptates! Exercitationem
-          vero autem molestiae dolorem exercitationem. Harum architecto eaque
-          quis rem veniam Nemo.
-        </p>
-        <p>
-          Dolor quo vero facilis porro soluta quasi Fugiat ad eos aut
-          exercitationem quam Animi maxime aut facilis hic eligendi fugit. Esse
-          obcaecati sequi ea officiis doloribus. Odit tempora qui deleniti.
-        </p>
-
-        <img
-          class="sliding-image feature"
-          src="https://images.unsplash.com/photo-1606054512716-fb198b6686c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80"
-          alt=""
-        />
+        <div class="sliding-image-flow-container full overflow-hidden content">
+          <img
+            class="sliding-image feature"
+            src="https://images.unsplash.com/photo-1606054512716-fb198b6686c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80"
+            alt="Light blue paint partially mixed into dark blue water"
+          />
+        </div>
 
         <h2>Cross-scrolling Text</h2>
 
-        <p><strong>
-          The two lines of display text will scroll in opposite directions as the user scrolls the page.
-        </strong></p>
+        <p>
+          <strong>
+            The two lines of display text will scroll in opposite directions as
+            the user scrolls the page.
+          </strong>
+        </p>
 
-        <p>Filler text for spacing. Nullam quis risus eget urna mollis ornare vel eu leo. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+        <p>
+          Filler text for spacing. Nullam quis risus eget urna mollis ornare vel
+          eu leo. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta
+          sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus
+          auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean
+          lacinia bibendum nulla sed consectetur. Nullam id dolor id nibh
+          ultricies vehicula ut id elit.
+        </p>
 
         <aside class="cross-scroll full">
           <p class="cross-scroll-initial cross-scroll-text">
@@ -184,14 +216,22 @@
           </p>
         </aside>
 
-        <p>Filler text for spacing. Nullam quis risus eget urna mollis ornare vel eu leo. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-
-        <h2>Section Pin</h2>
         <p>
-          <strong
-            >This will emulate scroll-jacking by creating a sticky track and
-            translating an element horizontally.</strong
-          >
+          Filler text for spacing. Nullam quis risus eget urna mollis ornare vel
+          eu leo. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta
+          sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus
+          auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean
+          lacinia bibendum nulla sed consectetur. Nullam id dolor id nibh
+          ultricies vehicula ut id elit.
+        </p>
+
+        <h2>Section Pin (Faux Scroll-Jacking)</h2>
+        <p>
+          <strong>
+            This will emulate scroll-jacking by creating a sticky track and
+            translating an element horizontally.
+          </strong>
         </p>
 
         <section class="section-pin full">
@@ -199,19 +239,19 @@
             <div class="pin-wrap">
               <img
                 src="https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-                alt=""
+                alt="Sparkly blue paint swirls"
               />
               <img
                 src="https://images.unsplash.com/photo-1550684848-86a5d8727436?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-                alt=""
+                alt="Yellow light through clear liquid with bubbles"
               />
               <img
                 src="https://images.unsplash.com/photo-1580610447943-1bfbef5efe07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-                alt=""
+                alt="Bubbles of paint that look like planets"
               />
               <img
                 src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-                alt=""
+                alt="A soft gradient from orange to blue"
               />
             </div>
           </div>
@@ -258,7 +298,7 @@
                 <img
                   class="phone-screen-img"
                   src="https://images.unsplash.com/photo-1691379635079-9f438036ea58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80"
-                  alt=""
+                  alt="A gorilla astronaut made of woven material crosses their arms"
                 />
               </div>
             </div>
@@ -271,7 +311,7 @@
                 <img
                   class="phone-screen-img"
                   src="https://images.unsplash.com/photo-1690993660127-1a7cdd87ec9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80"
-                  alt=""
+                  alt="A person with an astronaut helmet standing in a field of grass with flowers in their hand"
                 />
               </div>
             </div>
@@ -310,10 +350,11 @@
 
         <h2>Video Scroll Scrub</h2>
         <p>
-          <strong
-            >Use the animation progress values from the browser to progress an
-            HTML video element.</strong
-          >
+          <strong>
+            Use the animation progress values from the browser to progress an
+            HTML video element.
+          </strong>
+          <em>(Currently doesn't work on everything)</em>
         </p>
 
         <div class="full video-scrub-track">
