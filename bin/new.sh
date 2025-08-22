@@ -21,6 +21,6 @@ cp templates/* ${new_path}
 echo -e "<!doctype html>\n<html class=\"\" lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>${title}</title>\n    <meta name=\"description\" content=\"${description}\" />\n$(cat templates/index.html)" > "${new_path}/index.html"
 
 # Create json
-echo -e "{ \"title\": \"${title}\", \"description\": \"${description}\", \"tags\": \"${tags}\", \"url\": \"/${slug}/\", \"date\": \"${new_date}\" }" > "${new_path}/data.json"
+echo -e "{ \"title\": \"${title}\", \"description\": \"${description}\", \"tags\": \"${tags}\", \"url\": \"/${slug}/\", \"date\": \"${new_date}\", \"new\": true }" > "${new_path}/data.json"
 
 e_success "New entry created!"

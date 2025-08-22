@@ -19,7 +19,7 @@
         <h1 class="feature">Scroll-Driven Animations Basics</h1>
         <p class="color-white">
           <strong>All of this is 100% CSS, no JavaScript 😮</strong> (With the
-          exception of the video scrubber)
+          exception of the video scrubber). And it's <a href="">polyfilled</a> until <a href="https://caniuse.com/mdn-css_properties_animation-timeline_view">support drops in Safari</a>.
         </p>
         <h2>Image Reveals</h2>
         <p>
@@ -163,6 +163,28 @@
           src="https://images.unsplash.com/photo-1606054512716-fb198b6686c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80"
           alt=""
         />
+
+        <h2>Cross-scrolling Text</h2>
+
+        <p><strong>
+          The two lines of display text will scroll in opposite directions as the user scrolls the page.
+        </strong></p>
+
+        <p>Filler text for spacing. Nullam quis risus eget urna mollis ornare vel eu leo. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+        <aside class="cross-scroll full">
+          <p class="cross-scroll-initial cross-scroll-text">
+            <!-- Doubling the text so we can start in the middle -->
+            <span>Nullam. Tellus. Porta. Ligula. Pharetra.</span>
+            <span>Nullam. Tellus. Porta. Ligula. Pharetra.</span>
+          </p>
+          <p class="cross-scroll-reverse cross-scroll-text">
+            <span>Tortor. Lorem. Nullam. Pellentesque. Elit.</span>
+            <span>Tortor. Lorem. Nullam. Pellentesque. Elit.</span>
+          </p>
+        </aside>
+
+        <p>Filler text for spacing. Nullam quis risus eget urna mollis ornare vel eu leo. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 
         <h2>Section Pin</h2>
         <p>
@@ -374,6 +396,8 @@
         </p>
       </div>
     </main>
+
+    <script src="https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js"></script>
     <script type="module" src="./script.js"></script>
   </body>
 </html>

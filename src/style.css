@@ -31,23 +31,23 @@ body {
   padding: 2em;
 }
 
-h1 {
+.title {
   font-size: 3em;
-  line-height: 1;
 }
 
-h1 a {
+.title-link {
   font-size: 0.5em;
   color: var(--color-link);
   display: block;
 }
 
 @media all and (min-width: 768px) {
-  h1 a {
+  .title-link {
     display: inline;
   }
 }
 
+h1,
 h2 {
   line-height: 1em;
 }
@@ -173,12 +173,12 @@ input {
   break-inside: avoid;
 }
 
-.filter-entry h2 {
+.filter-entry-title {
   margin-bottom: 0.5em;
   position: relative;
 }
 
-.filter-entry h2:after {
+.filter-entry-title:after {
   content: attr(data-text);
   display: block;
   position: absolute;
@@ -190,7 +190,7 @@ input {
   transform: translateX(0.125rem);
 }
 
-.filter-entry h2:before {
+.filter-entry-title:before {
   content: attr(data-text);
   display: block;
   position: absolute;
@@ -199,6 +199,12 @@ input {
   text-shadow: none;
   pointer-events: none;
   transform: translateX(-0.125rem);
+}
+
+.filter-entry-new {
+  margin-inline-start: 0.25em;
+  animation: blink 1000ms linear infinite;
+  color: var(--color-accent);
 }
 
 .source {
@@ -255,12 +261,12 @@ input {
   z-index: 1;
 }
 
-.filter-entry span {
+.filter-entry-date {
   color: var(--color-accent);
   text-shadow: var(--color-accent) 1px 0 10px;
 }
 
-.filter-entry p {
+.filter-entry-text {
   text-wrap: pretty;
 }
 
@@ -341,6 +347,17 @@ input {
     );
     background-size: 100% 4px;
   }
+}
+
+.frame {
+  box-shadow:
+    inset 0 0 7rem black,
+    inset 0 0 2rem black,
+    0 0 5rem black;
+  inset: 0;
+  position: fixed;
+  z-index: 301;
+  pointer-events: none;
 }
 
 .blink {

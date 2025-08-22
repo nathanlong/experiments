@@ -1,70 +1,120 @@
 import "./style.css";
-import filter from "./filter.js";
+import Filter from "./filter.js";
 
-async function populate() {
-  const requestURL = "/experiments/postData.json";
-  const request = new Request(requestURL);
-
-  const response = await fetch(request);
-  const data = await response.json();
-
-  buildPosts(data);
+async function fetchPostData() {
+  try {
+    const response = await fetch("/experiments/postData.json");
+    if (!response.ok) {
+      throw new Error(`Failed to fetch post data: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching post data:", error);
+    return {};
+  }
 }
 
-function buildPosts(data) {
-  const section = document.querySelector("#content");
-  const sort = document.querySelector("#sort");
-  const posts = data;
-  const tags = [];
+function createElement(tag, attributes = {}, text = "") {
+  const element = document.createElement(tag);
 
-  for (const data of Object.keys(posts)) {
-    const post = posts[data];
-    const myArticle = document.createElement("article");
-    const myH2 = document.createElement("h2");
-    const myLink = document.createElement("a");
-    const myText = document.createElement("p");
-    const myDate = document.createElement("span");
-    const myTags = document.createElement("p");
-    const tag = post.tags.split(" ");
-    tag.forEach((tag) => {
-      tags.push(tag);
+  Object.entries(attributes).forEach(([key, value]) => {
+    element.setAttribute(key, value);
+  });
+
+  if (text) element.textContent = text;
+  return element;
+}
+
+function buildPosts(posts) {
+  const contentEl = document.querySelector("#content");
+  const sortEl = document.querySelector("#sort");
+  const allTags = new Set();
+  const fragment = document.createDocumentFragment();
+  let postEls = new Map();
+
+  for (const key of Object.keys(posts)) {
+    const post = posts[key];
+
+    // build tags
+    const tagList = post.tags.split(" ");
+    tagList.forEach((tag) => allTags.add(tag));
+
+    // Create elements
+    const article = createElement("article", {
+      class: "filter-entry",
+      "data-tags": post.tags,
+      "data-filter-entry": "",
+      "data-active": "true",
     });
 
-    myLink.textContent = post.title;
-    myText.textContent = post.description;
-    myDate.textContent = post.date ? post.date + " - " : "* - ";
-    myTags.textContent = post.tags;
-    myText.prepend(myDate);
-    myLink.setAttribute("href", "/experiments" + post.url);
-    myTags.setAttribute("class", "filter-entry-tags");
-    myH2.appendChild(myLink);
-    myH2.setAttribute("data-text", post.title);
-    myArticle.appendChild(myH2);
-    myArticle.appendChild(myText);
-    myArticle.appendChild(myTags);
-    section.appendChild(myArticle);
-    myArticle.setAttribute("class", "filter-entry");
-    myArticle.setAttribute("data-tags", post.tags);
-    myArticle.setAttribute("data-filter-entry", "");
-    myArticle.setAttribute("data-active", "true");
+    const link = createElement(
+      "a",
+      { href: `/experiments${post.url}` },
+      post.title,
+    );
+    const heading = createElement("h2", { class: "filter-entry-title" });
+    heading.appendChild(link);
+
+    if (post.new) {
+      const newLabel = createElement(
+        "span",
+        { class: "filter-entry-new" },
+        "NEW",
+      );
+      heading.appendChild(newLabel);
+    }
+
+    const text = createElement(
+      "p",
+      { class: "filter-entry-text" },
+      post.description,
+    );
+
+    const date = createElement(
+      "span",
+      { class: "filter-entry-date" },
+      post.date ? `${post.date} - ` : "* - ",
+    );
+
+    text.prepend(date);
+
+    const tags = createElement("p", { class: "filter-entry-tags" }, post.tags);
+
+    // Assemble article
+    article.appendChild(heading);
+    article.appendChild(text);
+    article.appendChild(tags);
+
+    fragment.appendChild(article);
+
+    // Store reference
+    postEls.set(key, article);
   }
 
-  const uniqueTags = tags.filter(onlyUnique);
-  uniqueTags.sort((a, b) => a.localeCompare(b));
+  contentEl.appendChild(fragment);
 
-  for (const tag of uniqueTags) {
-    const myOption = document.createElement("option");
-    myOption.textContent = tag;
-    myOption.value = tag;
-    sort.appendChild(myOption);
-  }
+  // Create tag options
+  const sortedTags = [...allTags].sort((a, b) => a.localeCompare(b));
+  const tagFragment = document.createDocumentFragment();
 
+  sortedTags.forEach((tag) => {
+    tagFragment.appendChild(createElement("option", { value: tag }, tag));
+  });
+
+  sortEl.appendChild(tagFragment);
+
+  // Initialize filter
   const filterEl = document.querySelector("[data-filter]");
-  new filter(filterEl);
+  new Filter(filterEl, posts, postEls);
 }
 
-function onlyUnique(value, index, array) {
-  return array.indexOf(value) === index;
+async function initialize() {
+  const data = await fetchPostData();
+  if (Object.keys(data).length > 0) {
+    buildPosts(data);
+  } else {
+    document.querySelector("#content").innerHTML = "<p>No posts available.</p>";
+  }
 }
 
-populate();
+initialize();

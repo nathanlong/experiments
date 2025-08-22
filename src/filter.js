@@ -1,16 +1,20 @@
-export default class filter {
-  constructor(el) {
+export default class Filter {
+  constructor(el, data, els) {
     this.el = el;
-    this.setVars();
-    this.bindEvents();
-  }
+    this.posts = data;
+    this.postEls = els;
 
-  setVars() {
+    // state
+    this.currentSearchTerm = "";
+    this.currentTag = "";
+    this.timeline = null;
+
+    // elements
     this.sortSearch = this.el.querySelector("[data-filter-search]");
     this.sortTag = this.el.querySelector("[data-filter-sort-tag]");
     this.clear = this.el.querySelector("[data-filter-clear]");
     this.entries = this.el.querySelectorAll("[data-filter-entry]");
-    this.sections = this.el.querySelectorAll("[data-filter-entry-section]");
+    this.section = this.el.querySelector("[data-filter-entry-section]");
     this.timeout = null;
 
     // animation presets
@@ -30,6 +34,9 @@ export default class filter {
       iterations: 1,
       easing: "cubic-bezier(0.33, 1, 0.68, 1)", //easeOutCubic
     };
+
+    // run
+    this.bindEvents();
   }
 
   bindEvents() {
@@ -45,61 +52,77 @@ export default class filter {
   }
 
   handleClear = () => {
-    this.sortSearch ? this.sortSearch.value = "" : null;
-    this.sortTag ? this.sortTag.value = "" : null;
-    this.filterSort("", "", "");
+    this.sortSearch ? (this.sortSearch.value = "") : null;
+    this.sortTag ? (this.sortTag.value = "") : null;
+    this.currentSearchTerm = "";
+    this.currentTag = "";
+    // this.filterSort("", "", "");
+    this.filterPosts();
   };
 
   handleSearchChange = (e) => {
-    clearTimeout(this.timeout)
+    clearTimeout(this.timeout);
 
-    this.timeout  = setTimeout(() => {
-      this.handleChange()
-    }, 500)
-  }
-
-  handleChange = (e) => {
-    const searchValue = this.sortSearch ? this.sortSearch.value.toLowerCase() : "";
-    const tagValue = this.sortTag ? this.sortTag.value : "";
-
-    this.filterSort(searchValue, tagValue)
+    this.timeout = setTimeout(() => {
+      this.handleChange();
+    }, 500);
   };
 
-  filterSort(filterSearch, filterTag) {
-    // build array of matches
-    const matches = Array.prototype.filter.call(
-      this.entries,
-      function (entry) {
-        if (filterSearch === "" && filterTag === "") {
-          return entry;
-        }
+  handleChange = (e) => {
+    const searchValue = this.sortSearch
+      ? this.sortSearch.value.toLowerCase()
+      : "";
+    const tagValue = this.sortTag ? this.sortTag.value : "";
 
-        let searchMatch = true;
-        let tagMatch = true;
+    this.currentSearchTerm = searchValue;
+    this.currentTag = tagValue;
 
-        if (filterSearch !== "") {
-          searchMatch = entry.innerHTML.toLowerCase().includes(filterSearch)
-        }
+    // this.filterSort(searchValue, tagValue);
+    this.filterPosts();
+  };
 
-        if (filterTag !== "") {
-          tagMatch = entry.dataset.tags.includes(filterTag);
-        }
+  filterPosts() {
+    let toShow = [];
+    let toHide = [];
 
-        return searchMatch && tagMatch
+    for (const [key, post] of Object.entries(this.posts)) {
+      const element = this.postEls.get(key);
+      if (!element) continue;
+
+      const matchesSearch =
+        this.currentSearchTerm === "" ||
+        post.title.toLowerCase().includes(this.currentSearchTerm) ||
+        post.description.toLowerCase().includes(this.currentSearchTerm);
+
+      const matchesTag =
+        this.currentTag === "" ||
+        post.tags.split(" ").includes(this.currentTag);
+
+      const shouldBeVisible = matchesSearch && matchesTag;
+      const isCurrentlyVisible = element.dataset.active === "true";
+
+      if (shouldBeVisible && !isCurrentlyVisible) {
+        toShow.push(element);
+      } else if (!shouldBeVisible && isCurrentlyVisible) {
+        toHide.push(element);
       }
-    );
+    }
 
-    this.sections.forEach((section) => {
-      section.animate(this.fadeOut, this.defaultTiming).finished.then(() => {
-        this.entries.forEach((entry) => {
-            entry.dataset.active = false;
-            matches.forEach((match) => {
-              match.dataset.active = true;
-            });
-        });
-        section.animate(this.fadeIn, this.defaultTiming);
-      })
+    // Apply changes if needed
+    if (toShow.length > 0 || toHide.length > 0) {
+      this.updateVisibility(toShow, toHide);
+    }
+  }
 
-    })
+  updateVisibility(toShow, toHide) {
+    this.section.animate(this.fadeOut, this.defaultTiming).finished.then(() => {
+      toHide.forEach((entry) => {
+        entry.dataset.active = false;
+      });
+      toShow.forEach((entry) => {
+        entry.dataset.active = true;
+      });
+      this.section.animate(this.fadeIn, this.defaultTiming);
+    });
   }
 }

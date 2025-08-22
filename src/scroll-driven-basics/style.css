@@ -1,5 +1,7 @@
 /* Reset everything */
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -21,9 +23,19 @@ h1 {
   text-wrap: balance;
 }
 
-.color-white, h2, h3, h4, h5 {
+.color-white,
+h2,
+h3,
+h4,
+h5 {
   color: #ffffff;
 }
+
+a {
+  color: goldenrod;
+}
+
+a:visited { color: darkgoldenrod; }
 
 /* PROGRESS */
 
@@ -112,6 +124,48 @@ html {
   animation: ease-out slideIn both;
   animation-timeline: --sliding-image;
   animation-range: entry 25% cover 50%;
+}
+
+/* CROSS-SCROLLING TEXT */
+
+.cross-scroll {
+  overflow: hidden;
+  view-timeline-name: --cross-scroll;
+  view-timeline-axis: block;
+}
+
+.cross-scroll-text {
+  font-size: 4em;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: white;
+  width: max-content;
+}
+
+.cross-scroll-initial {
+  animation: linear cross-initial both;
+  animation-timeline: --cross-scroll;
+  animation-range: entry 0% cover 100%;
+  transform: translateX(-50%)
+}
+
+.cross-scroll-reverse {
+  animation: linear cross-reverse both;
+  animation-timeline: --cross-scroll;
+  animation-range: entry 0% cover 100%;
+  transform: translateX(0)
+}
+
+@keyframes cross-initial {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes cross-reverse {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* SECTION PIN */
@@ -285,7 +339,7 @@ html {
 
 .phone-screen:before {
   position: absolute;
-  content: '';
+  content: "";
   inset: 0;
   background: conic-gradient(
       from -17.18deg at 50% 50%,
@@ -300,7 +354,6 @@ html {
   height: 100%;
   object-fit: cover;
 }
-
 
 /* DEMO SPACING */
 
@@ -362,7 +415,6 @@ img {
 .source {
   background-color: rgba(255, 255, 255, 0.6);
 }
-
 
 /* VIDEO SCRUBBER */
 
