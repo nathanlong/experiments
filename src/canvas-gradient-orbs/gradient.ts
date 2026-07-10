@@ -17,6 +17,9 @@ export interface CanvasGradientOptions {
   bg?: string;
   colors?: string[];
   resolution?: number;
+  // When true, render hard-edged discs at each orb position (no Gaussian
+  // blend) so you can see the underlying motion. For debugging only.
+  debug?: boolean;
 }
 
 export interface CanvasGradientInstance {
@@ -28,7 +31,7 @@ export interface CanvasGradientInstance {
 
 // Consts -----------------------------------------------------------------
 
-const MAX_CIRCLES = 8;
+const MAX_ORBITS = 8;
 const DEFAULT_BG = "#0a0a1a";
 const DEFAULT_COLORS = ["#3b82f6", "#8b5cf6", "#06b6d4", "#ec4899"];
 
@@ -94,26 +97,32 @@ function easeInOutCubic(t: number): number {
   return t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
 }
 
-// Circle data ------------------------------------------------------------
+// Orbit data -------------------------------------------------------------
 
-interface Circle {
+interface Orbit {
   cx: number;
   cy: number;
   rx: number;
   ry: number;
   speed: number;
   phase: number;
+  // Drawn-size multiplier on the global uSigma (1 = default size).
+  scale: number;
 }
 
-function makeCircles(count: number): Circle[] {
+function makeOrbits(count: number): Orbit[] {
   return Array.from({ length: count }, (_, i) => ({
     cx: Math.random(),
     cy: Math.random(),
-    // First circle is always large; rest vary small–medium for contrast
+    // First orbit sweeps a wide path; the rest drift within a small–medium
+    // radius. (This is orbit radius, i.e. how far the blob wanders — not its
+    // drawn size, which is uSigma * scale below.)
     rx: i === 0 ? 0.4 + Math.random() * 0.2 : 0.08 + Math.random() * 0.28,
     ry: i === 0 ? 0.4 + Math.random() * 0.2 : 0.08 + Math.random() * 0.28,
     speed: (0.04 + Math.random() * 0.12) * (Math.random() < 0.5 ? 1 : -1),
     phase: Math.random() * Math.PI * 2,
+    // First blob renders noticeably larger; the rest vary subtly around 1.
+    scale: i === 0 ? 1.5 : 0.8 + Math.random() * 0.5,
   }));
 }
 
@@ -161,13 +170,14 @@ void main() {
 
 const FS2 = /* glsl */ `#version 300 es
 precision mediump float;
-#define MAX_CIRCLES 8
+#define MAX_ORBITS 8
 
 uniform int   uCount;
-uniform vec2  uPositions[MAX_CIRCLES];
-uniform vec3  uColors[MAX_CIRCLES];
+uniform vec2  uPositions[MAX_ORBITS];
+uniform vec3  uColors[MAX_ORBITS];
 uniform vec3  uBgColor;
 uniform float uSigma;
+uniform float uScale[MAX_ORBITS];
 
 out vec4 fragColor;
 
@@ -184,15 +194,53 @@ void main() {
   float totalWeight = 0.0;
   vec3  blended = vec3(0.0);
 
-  for (int i = 0; i < MAX_CIRCLES; i++) {
+  for (int i = 0; i < MAX_ORBITS; i++) {
     if (i >= uCount) break;
     vec2 d = fragCoord - uPositions[i];
-    float w = exp(-dot(d, d) / (2.0 * uSigma * uSigma));
+    float s = uSigma * uScale[i];
+    float w = exp(-dot(d, d) / (2.0 * s * s));
     blended     += w * uColors[i];
     totalWeight += w;
   }
 
   vec3 color = (blended + uBgColor) / (totalWeight + 1.0);
+  fragColor = vec4(linearToSrgb(color), 1.0);
+}`;
+
+// Debug fragment shader (WebGL2): hard-edged discs at each orb position,
+// no Gaussian blend — reveals the raw motion the CPU feeds into uPositions.
+const DEBUG_FS2 = /* glsl */ `#version 300 es
+precision mediump float;
+#define MAX_ORBITS 8
+
+uniform int   uCount;
+uniform vec2  uPositions[MAX_ORBITS];
+uniform vec3  uColors[MAX_ORBITS];
+uniform vec3  uBgColor;
+uniform float uSigma;
+uniform float uScale[MAX_ORBITS];
+
+out vec4 fragColor;
+
+float linearToSrgbChannel(float v) {
+  return v <= 0.0031308 ? v * 12.92 : 1.055 * pow(v, 1.0 / 2.4) - 0.055;
+}
+
+vec3 linearToSrgb(vec3 c) {
+  return vec3(linearToSrgbChannel(c.r), linearToSrgbChannel(c.g), linearToSrgbChannel(c.b));
+}
+
+void main() {
+  vec2 fragCoord = gl_FragCoord.xy;
+  vec3 color = uBgColor;
+
+  for (int i = 0; i < MAX_ORBITS; i++) {
+    if (i >= uCount) break;
+    float r = uSigma * uScale[i];
+    float dist = length(fragCoord - uPositions[i]);
+    if (dist < r) color = uColors[i];
+  }
+
   fragColor = vec4(linearToSrgb(color), 1.0);
 }`;
 
@@ -203,13 +251,14 @@ void main() { gl_Position = vec4(aPos, 0.0, 1.0); }`;
 
 const FS1 = /* glsl */ `
 precision mediump float;
-#define MAX_CIRCLES 8
+#define MAX_ORBITS 8
 
 uniform int   uCount;
-uniform vec2  uPositions[MAX_CIRCLES];
-uniform vec3  uColors[MAX_CIRCLES];
+uniform vec2  uPositions[MAX_ORBITS];
+uniform vec3  uColors[MAX_ORBITS];
 uniform vec3  uBgColor;
 uniform float uSigma;
+uniform float uScale[MAX_ORBITS];
 
 float linearToSrgbChannel(float v) {
   return v <= 0.0031308 ? v * 12.92 : 1.055 * pow(v, 1.0 / 2.4) - 0.055;
@@ -224,15 +273,50 @@ void main() {
   float totalWeight = 0.0;
   vec3  blended = vec3(0.0);
 
-  for (int i = 0; i < MAX_CIRCLES; i++) {
+  for (int i = 0; i < MAX_ORBITS; i++) {
     if (i >= uCount) break;
     vec2 d = fragCoord - uPositions[i];
-    float w = exp(-dot(d, d) / (2.0 * uSigma * uSigma));
+    float s = uSigma * uScale[i];
+    float w = exp(-dot(d, d) / (2.0 * s * s));
     blended     += w * uColors[i];
     totalWeight += w;
   }
 
   vec3 color = (blended + uBgColor) / (totalWeight + 1.0);
+  gl_FragColor = vec4(linearToSrgb(color), 1.0);
+}`;
+
+// Debug fragment shader (WebGL1): hard-edged discs, no Gaussian blend.
+const DEBUG_FS1 = /* glsl */ `
+precision mediump float;
+#define MAX_ORBITS 8
+
+uniform int   uCount;
+uniform vec2  uPositions[MAX_ORBITS];
+uniform vec3  uColors[MAX_ORBITS];
+uniform vec3  uBgColor;
+uniform float uSigma;
+uniform float uScale[MAX_ORBITS];
+
+float linearToSrgbChannel(float v) {
+  return v <= 0.0031308 ? v * 12.92 : 1.055 * pow(v, 1.0 / 2.4) - 0.055;
+}
+
+vec3 linearToSrgb(vec3 c) {
+  return vec3(linearToSrgbChannel(c.r), linearToSrgbChannel(c.g), linearToSrgbChannel(c.b));
+}
+
+void main() {
+  vec2 fragCoord = gl_FragCoord.xy;
+  vec3 color = uBgColor;
+
+  for (int i = 0; i < MAX_ORBITS; i++) {
+    if (i >= uCount) break;
+    float r = uSigma * uScale[i];
+    float dist = length(fragCoord - uPositions[i]);
+    if (dist < r) color = uColors[i];
+  }
+
   gl_FragColor = vec4(linearToSrgb(color), 1.0);
 }`;
 
@@ -245,6 +329,7 @@ export function canvasGradient(
   const bg = options.bg ?? DEFAULT_BG;
   const colors = options.colors ?? DEFAULT_COLORS;
   const resolution = options.resolution ?? 0.5;
+  const debug = options.debug ?? false;
 
   const ac = new AbortController();
   const prefersReducedMotion = window.matchMedia(
@@ -262,7 +347,10 @@ export function canvasGradient(
 
   // Compile + link
   const vs = compileShader(gl, gl.VERTEX_SHADER, isGL2 ? VS2 : VS1);
-  const fs = compileShader(gl, gl.FRAGMENT_SHADER, isGL2 ? FS2 : FS1);
+  const fsSrc = isGL2
+    ? debug ? DEBUG_FS2 : FS2
+    : debug ? DEBUG_FS1 : FS1;
+  const fs = compileShader(gl, gl.FRAGMENT_SHADER, fsSrc);
   const program = linkProgram(gl, vs, fs);
   gl.useProgram(program);
 
@@ -287,19 +375,26 @@ export function canvasGradient(
   const uColors = gl.getUniformLocation(program, "uColors");
   const uBgColor = gl.getUniformLocation(program, "uBgColor");
   const uSigma = gl.getUniformLocation(program, "uSigma");
+  const uScale = gl.getUniformLocation(program, "uScale");
 
-  const circleCount = Math.min(colors.length, MAX_CIRCLES);
-  const circles = makeCircles(circleCount);
+  const orbitCount = Math.min(colors.length, MAX_ORBITS);
+  const orbits = makeOrbits(orbitCount);
+
+  // Per-blob size multipliers. Constant for the life of the instance, so we
+  // build the buffer once and upload it a single time below.
+  const scaleData = new Float32Array(MAX_ORBITS).fill(1);
+  for (let i = 0; i < orbitCount; i++) scaleData[i] = orbits[i].scale;
+  gl.uniform1fv(uScale, scaleData); // program is already bound; value persists
 
   // Live color state. `current*` (linear RGB) is what the shader reads;
   // `current*Lab` (OKLAB) is the tween start point.
-  const currentColors = new Float32Array(MAX_CIRCLES * 3);
+  const currentColors = new Float32Array(MAX_ORBITS * 3);
   const currentBgColor = new Float32Array(3);
-  let currentLabColors: Lab[] = colors.slice(0, circleCount).map(hexToOklab);
+  let currentLabColors: Lab[] = colors.slice(0, orbitCount).map(hexToOklab);
   let currentBgLab: Lab = hexToOklab(bg);
 
   // Persistent per-frame buffer (avoids allocating every render).
-  const posData = new Float32Array(MAX_CIRCLES * 2);
+  const posData = new Float32Array(MAX_ORBITS * 2);
 
   setLinearFromLab();
 
@@ -326,7 +421,7 @@ export function canvasGradient(
     currentBgColor[0] = br;
     currentBgColor[1] = bgc;
     currentBgColor[2] = bb;
-    for (let i = 0; i < circleCount; i++) {
+    for (let i = 0; i < orbitCount; i++) {
       const [r, g, b] = oklabToLinearClamped(...currentLabColors[i]);
       currentColors[i * 3] = r;
       currentColors[i * 3 + 1] = g;
@@ -390,13 +485,13 @@ export function canvasGradient(
     applyTween(timestamp);
 
     const t = timestamp / 1000;
-    for (let i = 0; i < circleCount; i++) {
-      const c = circles[i];
+    for (let i = 0; i < orbitCount; i++) {
+      const c = orbits[i];
       posData[i * 2] = (c.cx + c.rx * Math.cos(t * c.speed + c.phase)) * canvas.width;
       posData[i * 2 + 1] = (c.cy + c.ry * Math.sin(t * c.speed + c.phase)) * canvas.height;
     }
 
-    gl.uniform1i(uCount, circleCount);
+    gl.uniform1i(uCount, orbitCount);
     gl.uniform2fv(uPositions, posData);
     gl.uniform3fv(uColors, currentColors);
     gl.uniform3fv(uBgColor, currentBgColor);
@@ -446,7 +541,7 @@ export function canvasGradient(
   // Public API -----------------------------------------------------------
 
   function tweenTo(palette: GradientPalette, duration = 1500) {
-    const targetColors = palette.colors.slice(0, MAX_CIRCLES).map(hexToOklab);
+    const targetColors = palette.colors.slice(0, MAX_ORBITS).map(hexToOklab);
     const targetBg = hexToOklab(palette.bg);
     const count = Math.min(currentLabColors.length, targetColors.length);
 
@@ -519,6 +614,7 @@ function parseOptions(canvas: HTMLCanvasElement): CanvasGradientOptions {
   const options: CanvasGradientOptions = {};
   if (canvas.dataset.bg) options.bg = canvas.dataset.bg;
   if (canvas.dataset.resolution) options.resolution = Number(canvas.dataset.resolution);
+  if (canvas.dataset.debug != null) options.debug = canvas.dataset.debug !== "false";
 
   // Accept JSON arrays or a comma-separated list in data-colors.
   const raw = canvas.dataset.colors;
